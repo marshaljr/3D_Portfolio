@@ -26,7 +26,8 @@ const About = () => {
               <p className="grid-headtext">Hi, I'm Marshal</p>
               <p className="grid-subtext">
                 With 4 years of experience, I have honed my skills in frontend
-                development, with a focus on 3D websites.
+                development, with a focus on JS/TS. At the time, expanding my
+                skills in Full-Stack Dev.
               </p>
             </div>
           </div>
@@ -71,7 +72,7 @@ const About = () => {
             </div>
             <div>
               <p className="grid-headtext">
-                I work remotely across most timezones.
+                I work as web developer at any location.
               </p>
               <p className="grid-subtext">
                 I'm based in Nepal, with remote work available.
