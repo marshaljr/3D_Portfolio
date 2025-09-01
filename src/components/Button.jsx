@@ -1,8 +1,10 @@
 import React from "react";
 
-const Button = ({ name, isBeam = false, containerClass }) => {
+const Button = ({ name, isBeam = false, containerClass, onClick }) => {
   return (
-    <button className={`btn ${containerClass} bg-neutral-900`}>
+    <button
+      className={`btn ${containerClass} bg-neutral-900`}
+      onClick={onClick}>
       {isBeam && (
         <span className="relative flex h-3 w-3">
           <span className="btn-ping" />

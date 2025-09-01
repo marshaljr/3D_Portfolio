@@ -7,18 +7,25 @@ import CanvasLoader from "../components/CanvasLoader";
 
 const Experience = () => {
   return (
-    <section className="c-space my-20">
+    <section className="c-space my-20" id="experience">
       <div className="w-full text-neutral-300">
         <h3 className="head-text">My Work Experience</h3>
         <div className="work-container">
           <div className="work-canvas border-neutral-800">
             <Canvas>
-              <ambientLight intensity={7} />
+              <ambientLight intensity={5} />
               <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
               <directionalLight intensity={1} position={[10, 10, 10]} />
-              <OrbitControls enableZoom={false} maxPolarAngle={Math.PI / 2} />
+              <OrbitControls
+                enableZoom={false}
+                maxPolarAngle={Math.PI / 2}
+                makeDefault
+                autoRotate
+                autoRotateSpeed={2.4}
+              />
+              <OrbitControls />
               <Suspense fallback={<CanvasLoader />}>
-                <Developer position-y={-3} scale={3} />
+                <Developer position={[0, -3, 0]} scale={3} />
               </Suspense>
             </Canvas>
           </div>
@@ -31,7 +38,11 @@ const Experience = () => {
                     className="work-content_container group hover:bg-neutral-900">
                     <div className="flex flex-col h-full justify-start items-center py-2 ">
                       <div className="work-content_logo ">
-                        <img src={icon} alt="logo" className="h-full w-full" />
+                        <img
+                          src={icon}
+                          alt={`${name} logo`}
+                          className="h-full w-full"
+                        />
                       </div>
                       <div className="work-content_bar bg-neutral-800" />
                     </div>

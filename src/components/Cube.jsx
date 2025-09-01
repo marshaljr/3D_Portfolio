@@ -1,36 +1,53 @@
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Float, useGLTF, useTexture } from "@react-three/drei";
+
+useGLTF.preload("models/cube.glb");
+useTexture.preload("textures/cube.png");
 
 const Cube = ({ ...props }) => {
   const { nodes } = useGLTF("models/cube.glb");
-
   const texture = useTexture("textures/cube.png");
-
   const cubeRef = useRef();
   const [hovered, setHovered] = useState(false);
 
-  useGSAP(() => {
-    gsap
-      .timeline({
-        repeat: -1,
-        repeatDelay: 0.5,
-      })
-      .to(cubeRef.current.rotation, {
-        y: hovered ? "+=2" : `+=${Math.PI * 2}`,
-        x: hovered ? "+=2" : `-=${Math.PI * 2}`,
-        duration: 2.5,
-        stagger: {
-          each: 0.15,
-        },
-      });
-  });
+  // useGSAP(() => {
+  //   gsap
+  //     .timeline({
+  //       repeat: -1,
+  //       repeatDelay: 0.5,
+  //     })
+  //     .to(cubeRef.current.rotation, {
+  //       y: hovered ? "+=2" : `+=${Math.PI * 2}`,
+  //       x: hovered ? "+=2" : `-=${Math.PI * 2}`,
+  //       duration: 2.5,
+  //       stagger: 0.15,
+  //     });
+  // });
+  useEffect(() => {
+    if (!cubeRef.current) return;
+
+    const tl = gsap.timeline({
+      repeat: -1,
+      repeatDelay: 0.5,
+    });
+
+    tl.to(cubeRef.current.rotation, {
+      y: hovered ? "+=2" : `+=${Math.PI * 2}`,
+      x: hovered ? "+=2" : `-=${Math.PI * 2}`,
+      duration: 2.5,
+      stagger: 0.15,
+    });
+
+    // Cleanup on unmount
+    return () => tl.kill();
+  }, [hovered]); // re-run timeline if hovered changes
 
   return (
     <Float floatIntensity={2}>
       <group
-        position={[9, -4, 0]}
+        position={[6, -4, 0]}
         rotation={[2.6, 0.8, -1.8]}
         scale={0.74}
         dispose={null}

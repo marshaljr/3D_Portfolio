@@ -1,16 +1,14 @@
 import { useGLTF, useTexture } from "@react-three/drei";
 import { useMemo } from "react";
 
+useGLTF.preload("/models/hacker-room.glb");
+useTexture.preload("textures/desk/monitor.png");
+useTexture.preload("textures/desk/screen.png");
+
 const HackerRoom = (props) => {
   const { nodes, materials } = useGLTF("/models/hacker-room.glb");
   const monitortxt = useTexture("textures/desk/monitor.png");
   const screenTxt = useTexture("textures/desk/screen.png");
-  // const { nodes, materials } = useMemo(
-  //   () => useGLTF("/models/hacker-room.glb"),
-  //   []
-  // );
-  // const monitortxt = useMemo(() => useTexture("textures/desk/monitor.png"), []);
-  // const screenTxt = useMemo(() => useTexture("textures/desk/screen.png"), []);
 
   if (!nodes || !materials) return null;
   return (

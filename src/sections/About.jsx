@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Globe from "react-globe.gl";
-import { color } from "three/tsl";
 import Button from "../components/Button";
 
 const About = () => {
@@ -12,6 +11,7 @@ const About = () => {
       setHasCopied(false);
     }, 2000);
   };
+
   return (
     <section className="c-space my-20" id="about">
       <div className="grid xl:grid-cols-3 xl:grid-rows-6 md:grid-cols-2 grid-cols-1 gap-5 h-full">
@@ -77,7 +77,19 @@ const About = () => {
               <p className="grid-subtext">
                 I'm based in Nepal, with remote work available.
               </p>
-              <Button name="Contact me" isBeam containerClass="w-full mt-10" />
+              <Button
+                name="Contact me"
+                isBeam
+                containerClass="w-full mt-10"
+                onClick={() => {
+                  const contactSection = document.getElementById("contact");
+                  if (contactSection) {
+                    contactSection.scrollIntoView({
+                      behavior: "smooth",
+                    });
+                  }
+                }}
+              />
             </div>
           </div>
         </div>
@@ -105,7 +117,8 @@ const About = () => {
               className="w-full md:h-[126px] sm:h-[276px] h-fit object-cover sm:object-top"
             />
             <div className="space-y-2">
-              <p className="grid-subtext text-center">Contact me</p>
+              <p className="grid-headtext">Get in Touch</p>
+
               <div className="copy-container" onClick={handleCopy}>
                 <img src={hasCopied ? "assets/tick.svg" : "assets/copy.svg"} />
                 <p className="lg:text-2xl md:text-xl font-medium text-gray_gradient text-white">
