@@ -25,7 +25,7 @@ const About = () => {
             <div>
               <p className="grid-headtext">Hi, I'm Marshal</p>
               <p className="grid-subtext">
-                With 4 years of experience, I have honed my skills in frontend
+                With 5 years of self-learning, I have honed my skills in frontend/backend
                 development, with a focus on JS/TS. At the time, expanding my
                 skills in Full-Stack Dev.
                 <span>
