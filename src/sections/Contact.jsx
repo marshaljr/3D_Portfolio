@@ -139,7 +139,7 @@ const Contact = () => {
                 required
                 rows={4}
                 className="field-input bg-neutral-800 placeholder-gray-500 text-white px-3 py-2 sm:px-4 sm:py-3 rounded-lg focus:border-blue-400 focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50 hover:border-blue-400 hover:ring-2 hover:ring-blue-400 hover:ring-opacity-50 transition-all duration-400 outline-none"
-                placeholder="Hi, I want to give you a job..."
+                placeholder="Hi, I have a job for you..."
               />
             </label>
             <button
