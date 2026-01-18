@@ -84,7 +84,7 @@ const navLinks = [
 const myProjects = [
   {
     title: "SaaS Landing Page",
-    desc: "Xora is a modern SaaS platform that empowers Xora to create and distribute content efficiently.",
+    desc: "Xora is a modern SaaS platform that empowers to create and distribute content efficiently.",
     subdesc:
       "Built with React, Tailwind CSS, TypeScript, and Framer Motion, Xora ensures fast, scalable, and visually engaging user experiences for creators.",
     href: "https://saa-s-xora.vercel.app/",
@@ -158,7 +158,7 @@ const myProjects = [
   },
   {
     title: "Movie Search Website",
-    desc: "This is a platform for searching and managing movie databases, offering users fast access to movie details, reviews, and ratings.",
+    desc: "This is a platform for searching and managing latest movies feed, offering users fast access to movie details, reviews, and ratings.",
     subdesc:
       "Built with React, TailwinCSS, Appwrite, Framer Motion, Tankstack query, and tmdb APIs, it provides efficient search functionality, reliable data handling, and real-time updates for users.",
     href: "https://movieweb-theta.vercel.app/",
