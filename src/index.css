@@ -11,11 +11,57 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
   background: #010103;
   font-family: 'General Sans', sans-serif;
+  overflow-x: hidden;
+}
+
+/* Improve touch targets for mobile - minimum 44px */
+@media (max-width: 768px) {
+
+  button,
+  .nav-li a,
+  .arrow-btn,
+  .copy-container,
+  .social-icon {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Make form inputs and buttons touch-friendly */
+  .field-input,
+  .field-btn,
+  .btn {
+    min-height: 48px;
+  }
+}
+
+/* Mobile navigation improvements */
+.nav-sidebar {
+  @apply absolute left-0 right-0 backdrop-blur-sm transition-all duration-300 ease-in-out overflow-hidden z-20 mx-auto sm:hidden block;
+}
+
+/* Focus visible for keyboard navigation */
+:focus-visible {
+  outline: 2px solid #eeca66;
+  outline-offset: 2px;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 @layer utilities {

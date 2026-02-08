@@ -1,5 +1,5 @@
 import { Leva } from "leva";
-import { Suspense } from "react";
+import { Suspense, useState, useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
 import { useMediaQuery } from "react-responsive";
 import { PerspectiveCamera } from "@react-three/drei";
@@ -19,14 +19,31 @@ const Hero = () => {
   const isMobile = useMediaQuery({ maxWidth: 768 });
   const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1024 });
 
+  // Performance optimization for mobile
+  const [dpr, setDpr] = useState(1.5);
+
+  useEffect(() => {
+    if (isMobile) {
+      // Reduce pixel ratio on mobile for better performance
+      setDpr(Math.min(window.devicePixelRatio, 1.5));
+    }
+  }, [isMobile]);
+
   const sizes = calculateSizes(isSmall, isMobile, isTablet);
 
   return (
-    <section className="min-h-screen w-full flex flex-col relative " id="home">
-      <div className="w-full mx-auto flex flex-col sm:mt-36 mt-20 c-space gap-3">
-        <p className="sm:text-3xl text-xl font-medium text-white text-center font-generalsans">
+    <section
+      className="min-h-screen w-full flex flex-col relative"
+      id="home"
+      role="region"
+      aria-label="Hero section">
+      <div className="w-full mx-auto flex flex-col sm:mt-36 mt-20 c-space gap-3 z-10 relative">
+        <p
+          className="sm:text-3xl text-xl font-medium text-white text-center font-generalsans"
+          role="heading"
+          aria-level={1}>
           Hi, I am Marshal{" "}
-          <span>
+          <span aria-hidden="true">
             <lord-icon
               src="https://cdn.lordicon.com/zubhquzc.json"
               trigger="loop"
@@ -41,8 +58,19 @@ const Hero = () => {
         </p>
       </div>
 
-      <div className="w-full h-full absolute inset-0">
-        <Canvas className="w-full h-full">
+      <div
+        className="w-full h-full absolute inset-0"
+        aria-label="3D Interactive Scene"
+        role="img">
+        <Canvas
+          className="w-full h-full"
+          dpr={dpr}
+          gl={{
+            antialias: !isMobile,
+            powerPreference: "high-performance",
+            alpha: false,
+          }}
+          performance={{ min: 0.5 }}>
           <Suspense fallback={<CanvasLoader />}>
             <Leva hidden />
             <PerspectiveCamera makeDefault position={[0, 0, 30]} />
@@ -68,7 +96,10 @@ const Hero = () => {
       </div>
 
       <div className="absolute bottom-7 left-0 right-0 w-full z-10 c-space">
-        <a href="#about" className="w-fit">
+        <a
+          href="#about"
+          className="w-fit"
+          aria-label="Navigate to About section">
           <Button
             name="Let's work together"
             isBeam

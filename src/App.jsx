@@ -11,16 +11,18 @@ import { SpeedInsights } from "@vercel/speed-insights/react";
 
 const App = () => {
   return (
-    <main className="max-w-7xl mx-auto">
+    <div className="app-container">
       <Navbar />
-      <Hero />
-      <About />
-      <Experience />
-      <Projects />
-      <Contact />
+      <main id="main-content">
+        <Hero />
+        <About />
+        <Experience />
+        <Projects />
+        <Contact />
+      </main>
       <Footer />
       <SpeedInsights />
-    </main>
+    </div>
   );
 };
 

@@ -5,7 +5,7 @@ import useAlert from "../hooks/useAlert.js";
 import Alert from "../components/Alert.jsx";
 
 const Contact = () => {
-  const formRef = useRef();
+  const formRef = useRef(null);
 
   const { alert, showAlert, hideAlert } = useAlert();
   const [loading, setLoading] = useState(false);
@@ -34,7 +34,7 @@ const Contact = () => {
           to_email: "marshaljr615@gmail.com",
           message: form.message,
         },
-        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
       );
       setLoading(false);
 
@@ -68,16 +68,25 @@ const Contact = () => {
   return (
     <section
       className="c-space my-10 py-10 sm:my-16 md:my-20 px-4 sm:px-8"
-      id="contact">
+      id="contact"
+      role="region"
+      aria-label="Contact section">
       {alert.show && <Alert {...alert} />}
-      <div className="relative min-h-screen flex items-center justify-center flex-col px-4 sm:px-6 md:px-10">
+      <div
+        className="relative min-h-screen flex items-center justify-center flex-col px-4 sm:px-6 md:px-10"
+        id="main-content">
         <img
           src="/assets/terminal.png"
-          alt="terminal background"
-          className="absolute inset-0 min-h-screen"
+          alt=""
+          className="absolute inset-0 min-h-screen object-cover"
+          aria-hidden="true"
+          loading="lazy"
         />
         <div className="contact-container w-full max-w-2xl">
-          <h3 className="head-text text-white text-2xl sm:text-3xl md:text-4xl text-center mt-4 sm:mt-8 md:mt-10">
+          <h3
+            className="head-text text-white text-2xl sm:text-3xl md:text-4xl text-center mt-4 sm:mt-8 md:mt-10"
+            role="heading"
+            aria-level={2}>
             Let's Talk
           </h3>
           <p className="text-lg text-white opacity-70 sm:text-lg mt-4 sm:mt-6">
@@ -87,7 +96,8 @@ const Contact = () => {
           <form
             ref={formRef}
             onSubmit={handleSubmit}
-            className="mt-8 sm:mt-10 md:mt-12 flex flex-col space-y-5 sm:space-y-6 md:space-y-7">
+            className="mt-8 sm:mt-10 md:mt-12 flex flex-col space-y-5 sm:space-y-6 md:space-y-7"
+            noValidate>
             <label className="space-y-2 sm:space-y-3">
               <span className="field-label text-white opacity-80">
                 Full Name
@@ -98,8 +108,10 @@ const Contact = () => {
                 value={form.name}
                 onChange={handleChange}
                 required
+                aria-required="true"
                 className="field-input bg-neutral-800 placeholder-gray-500 text-white px-3 py-2 sm:px-4 sm:py-3 rounded-lg focus:border-blue-400 focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50 hover:border-blue-400 hover:ring-2 hover:ring-blue-400 hover:ring-opacity-50 transition-all duration-400 outline-none"
                 placeholder="Your Name"
+                autoComplete="name"
               />
             </label>
             <label className="space-y-2 sm:space-y-3">
@@ -110,14 +122,16 @@ const Contact = () => {
                 value={form.email}
                 onChange={handleChange}
                 required
+                aria-required="true"
                 className="field-input bg-neutral-800 placeholder-gray-500 text-white px-3 py-2 sm:px-4 sm:py-3 rounded-lg focus:border-blue-400 focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50 hover:border-blue-400 hover:ring-2 hover:ring-blue-400 hover:ring-opacity-50 transition-all duration-400 outline-none"
                 placeholder="someone@gmail.com"
+                autoComplete="email"
               />
             </label>
             <label className="space-y-2 sm:space-y-3">
               <span className="field-label text-white opacity-80">
                 Your Message
-                <span>
+                <span aria-hidden="true">
                   <lord-icon
                     src="https://cdn.lordicon.com/exymduqj.json"
                     trigger="loop"
@@ -137,6 +151,7 @@ const Contact = () => {
                 value={form.message}
                 onChange={handleChange}
                 required
+                aria-required="true"
                 rows={4}
                 className="field-input bg-neutral-800 placeholder-gray-500 text-white px-3 py-2 sm:px-4 sm:py-3 rounded-lg focus:border-blue-400 focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50 hover:border-blue-400 hover:ring-2 hover:ring-blue-400 hover:ring-opacity-50 transition-all duration-400 outline-none"
                 placeholder="Hi, I have a job for you..."
@@ -150,8 +165,9 @@ const Contact = () => {
              before:opacity-0 before:scale-0 before:transition-all before:duration-500 before:content-['']
              hover:before:opacity-100 hover:before:scale-100"
               type="submit"
-              disabled={loading}>
-              <span>
+              disabled={loading}
+              aria-busy={loading}>
+              <span aria-hidden="true">
                 <lord-icon
                   src="https://cdn.lordicon.com/kezeezyg.json"
                   trigger="loop"
@@ -169,8 +185,9 @@ const Contact = () => {
                 {loading ? "Sending..." : "Send message"}
                 <img
                   src="/assets/arrow-up.png"
-                  alt="arrow-up"
+                  alt=""
                   className="field-btn_arrow"
+                  aria-hidden="true"
                 />
               </span>
             </button>

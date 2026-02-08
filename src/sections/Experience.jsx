@@ -10,14 +10,23 @@ const Experience = () => {
   const [animationName, setAnimationName] = useState("idle");
   const [autoRotate, setAutoRotate] = useState(true);
 
-  const controlsRef = useRef();
+  const controlsRef = useRef(null);
 
   return (
-    <section className="c-space my-20 py-15" id="experience">
+    <section
+      className="c-space my-20 py-15"
+      id="experience"
+      role="region"
+      aria-label="Skills and Experience section">
       <div className="w-full text-neutral-300">
-        <h3 className="grid-headtext">My Skills</h3>
+        <h3 className="grid-headtext" role="heading" aria-level={2}>
+          My Skills
+        </h3>
         <div className="work-container items-center justify-center">
-          <div className="work-canvas border-neutral-800 h-100 sm:h-96 md:h-[40rem] ">
+          <div
+            className="work-canvas border-neutral-800 h-100 sm:h-96 md:h-[40rem]"
+            role="img"
+            aria-label="3D Developer character model showcasing animations">
             <Canvas>
               <ambientLight intensity={7} />
               <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
@@ -57,12 +66,16 @@ const Experience = () => {
               </Suspense>
             </Canvas>
           </div>
-          <div className="work-content border-neutral-800 mx-4 my-10">
+          <div
+            className="work-content border-neutral-800 mx-4 my-10"
+            role="list"
+            aria-label="Skills list">
             <div className="sm:py-6 py-2 sm:px-5 px-2.5 grid grid-cols-1 sm:grid-cols-2 ">
               {workExperiences.map(
-                ({ id, name, icon, animation, level, pos, badge }) => (
+                ({ id, name, icon, animation, level, pos, badge, title }) => (
                   <div
                     key={id}
+                    role="listitem"
                     onClick={() => {
                       setAnimationName(animation);
                       setAutoRotate(false);
@@ -81,13 +94,26 @@ const Experience = () => {
                       setAnimationName("idle");
                       setAutoRotate(true);
                     }}
-                    className="work-content_container py-4 group hover:bg-neutral-900 flex items-start sm:items-center rounded-lg transition cursor-pointer relative">
+                    className="work-content_container py-4 group hover:bg-neutral-900 flex items-start sm:items-center rounded-lg transition cursor-pointer relative"
+                    tabIndex={0}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        setAnimationName(animation);
+                        setAutoRotate(false);
+                        if (controlsRef.current) {
+                          controlsRef.current.reset();
+                        }
+                      }
+                    }}
+                    aria-label={`${name} - ${pos}, ${level} level`}
+                    title={title}>
                     <div className="flex flex-col h-full justify-start items-center">
-                      <div className="work-content_logo ">
+                      <div className="work-content_logo">
                         <img
                           src={icon}
                           alt={`${name} logo`}
                           className="h-full w-full"
+                          loading="lazy"
                         />
                       </div>
                       <div className="work-content_bar bg-neutral-800" />
@@ -98,17 +124,18 @@ const Experience = () => {
                     </div>
                     <div
                       className={`absolute top-1 right-2 text-sm sm:text-base transition-all duration-300 ease-in-out
-${
-  animationName === animation
-    ? "opacity-100 translate-x-0"
-    : "opacity-0 -translate-x-4"
-} ${
-                        level === "Intermediate"
-                          ? "bg-yellow-900/40 text-yellow-300"
-                          : level === "Advanced"
-                          ? "bg-blue-900/40 text-blue-400"
-                          : "bg-gray-700/30 text-gray-300"
-                      } rounded-lg px-1 py-1 w-max`}>
+  ${
+    animationName === animation
+      ? "opacity-100 translate-x-0"
+      : "opacity-0 -translate-x-4"
+  } ${
+    level === "Intermediate"
+      ? "bg-yellow-900/40 text-yellow-300"
+      : level === "Advanced"
+        ? "bg-blue-900/40 text-blue-400"
+        : "bg-gray-700/30 text-gray-300"
+  } rounded-lg px-1 py-1 w-max`}
+                      aria-hidden="true">
                       <div className="flex items-center gap-1 whitespace-nowrap">
                         {badge.endsWith(".json") ? (
                           <>
@@ -119,15 +146,15 @@ ${
                                 level === "Intermediate"
                                   ? "loop-book"
                                   : level === "Advanced"
-                                  ? "hover-heartbeat-alt"
-                                  : "loop"
+                                    ? "hover-heartbeat-alt"
+                                    : "loop"
                               }
                               colors={`primary:${
                                 level === "Intermediate"
                                   ? "#eeca66"
                                   : level === "Advanced"
-                                  ? "#60a5fa"
-                                  : "#d1d5db"
+                                    ? "#60a5fa"
+                                    : "#d1d5db"
                               }`}
                               style={{
                                 width: "20px",
@@ -145,7 +172,7 @@ ${
                       </div>
                     </div>
                   </div>
-                )
+                ),
               )}
             </div>
           </div>

@@ -13,22 +13,27 @@ const About = () => {
   };
 
   return (
-    <section className="c-space my-25 py-10" id="about">
+    <section
+      className="c-space my-25 py-10"
+      id="about"
+      role="region"
+      aria-label="About section">
       <div className="grid xl:grid-cols-3 xl:grid-rows-6 md:grid-cols-2 grid-cols-1 gap-5 h-full">
         <div className="col-span-1 xl:row-span-3">
           <div className="grid-container">
             <img
               src="/assets/grid1.png"
-              alt="grid-1"
+              alt="Illustration representing introduction and background"
               className="w-full sm:h-[276px] h-fit object-contain"
+              loading="lazy"
             />
             <div>
               <p className="grid-headtext">Hi, I'm Marshal Ram</p>
               <p className="grid-subtext">
-                With 4 years of self-learning, I have honed my skills in frontend
-                development, with a focus on JS/TS. At the time, expanding my
-                skills in Full-Stack Dev.
-                <span>
+                With 4 years of self-learning, I have honed my skills in
+                frontend development, with a focus on JS/TS. At the time,
+                expanding my skills in Full-Stack Dev.
+                <span aria-hidden="true">
                   <lord-icon
                     src="https://cdn.lordicon.com/lbcxnxti.json"
                     trigger="loop"
@@ -50,14 +55,15 @@ const About = () => {
           <div className="grid-container">
             <img
               src="/assets/grid2.png"
-              alt="grid-2"
+              alt="Technology stack icons and tools"
               className="w-full sm:h-[276px] h-fit object-contain"
+              loading="lazy"
             />
             <div>
               <p className="grid-headtext">Tech Stack</p>
               <p className="grid-subtext">
                 I specialize in Javascript/Typescript with a focus on React.
-                <span>
+                <span aria-hidden="true">
                   <lord-icon
                     src="https://cdn.lordicon.com/jectmwqf.json"
                     trigger="loop"
@@ -75,7 +81,10 @@ const About = () => {
         </div>
         <div className="col-span-1 xl:row-span-4">
           <div className="grid-container">
-            <div className="rounded-3xl w-full sm:h-[326px] h-fit flex justify-center items-center">
+            <div
+              className="rounded-3xl w-full sm:h-[326px] h-fit flex justify-center items-center"
+              role="img"
+              aria-label="Interactive 3D Globe showing Nepal location">
               <Globe
                 height={326}
                 width={326}
@@ -99,31 +108,35 @@ const About = () => {
             <div>
               <p className="grid-headtext">
                 I work as web developer at any location.
-                <lord-icon
-                  src="https://cdn.lordicon.com/rpviwvwn.json"
-                  trigger="loop"
-                  state="hover-rotate-up-to-down"
-                  colors="primary:#eeca66,secondary:#08a88a"
-                  style={{
-                    width: "25px",
-                    height: "25px",
-                    paddingTop: "4px",
-                    paddingLeft: "5px",
-                  }}></lord-icon>
+                <span aria-hidden="true">
+                  <lord-icon
+                    src="https://cdn.lordicon.com/rpviwvwn.json"
+                    trigger="loop"
+                    state="hover-rotate-up-to-down"
+                    colors="primary:#eeca66,secondary:#08a88a"
+                    style={{
+                      width: "25px",
+                      height: "25px",
+                      paddingTop: "4px",
+                      paddingLeft: "5px",
+                    }}></lord-icon>
+                </span>
               </p>
               <p className="grid-subtext">
                 I'm based in Nepal, with remote work available.
-                <lord-icon
-                  src="https://cdn.lordicon.com/onmwuuox.json"
-                  trigger="loop"
-                  state="hover-jump-roll"
-                  colors="primary:#eeca66,secondary:#b4b4b4"
-                  style={{
-                    width: "25px",
-                    height: "25px",
-                    paddingTop: "6px",
-                    paddingLeft: "4px",
-                  }}></lord-icon>
+                <span aria-hidden="true">
+                  <lord-icon
+                    src="https://cdn.lordicon.com/onmwuuox.json"
+                    trigger="loop"
+                    state="hover-jump-roll"
+                    colors="primary:#eeca66,secondary:#b4b4b4"
+                    style={{
+                      width: "25px",
+                      height: "25px",
+                      paddingTop: "6px",
+                      paddingLeft: "4px",
+                    }}></lord-icon>
+                </span>
               </p>
               <Button
                 name="Contact me"
@@ -154,15 +167,16 @@ const About = () => {
           <div className="grid-container">
             <img
               src="/assets/grid3.png"
-              alt="grid-3"
+              alt="Coding and passion illustration"
               className="w-full sm:h-[266px] h-fit object-contain"
+              loading="lazy"
             />
             <div>
               <p className="grid-headtext">My Passion for Coding</p>
               <p className="grid-subtext">
                 I love solving problems and building things through code. Coding
                 isn't just my profession - it is my passion.
-                <span>
+                <span aria-hidden="true">
                   <lord-icon
                     src="https://cdn.lordicon.com/ogjpwrxe.json"
                     trigger="loop"
@@ -184,13 +198,14 @@ const About = () => {
           <div className="grid-container">
             <img
               src="/assets/grid4.png"
-              alt="grid-4"
+              alt="Contact information and communication"
               className="w-full md:h-[126px] sm:h-[276px] h-fit object-cover sm:object-top"
+              loading="lazy"
             />
             <div className="space-y-2">
               <p className="grid-headtext">
                 Get in Touch{" "}
-                <span>
+                <span aria-hidden="true">
                   <lord-icon
                     src="https://cdn.lordicon.com/jdgfsfzr.json"
                     trigger="loop"
@@ -205,8 +220,22 @@ const About = () => {
                 </span>
               </p>
 
-              <div className="copy-container" onClick={handleCopy}>
-                <img src={hasCopied ? "assets/tick.svg" : "assets/copy.svg"} />
+              <div
+                className="copy-container cursor-pointer flex items-center gap-2 min-h-[44px] p-2"
+                onClick={handleCopy}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    handleCopy();
+                  }
+                }}
+                aria-label="Copy email address">
+                <img
+                  src={hasCopied ? "assets/tick.svg" : "assets/copy.svg"}
+                  alt={hasCopied ? "Copied" : "Copy"}
+                  className="w-5 h-5"
+                />
                 <p className="lg:text-2xl md:text-xl font-medium text-gray_gradient text-white">
                   marshaljr615@gmail.com
                 </p>
